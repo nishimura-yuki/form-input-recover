@@ -1,0 +1,50 @@
+{
+  "name": "form-input-recover",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://greendiver234.com",
+  "author": "Nishimura Yuki",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "10.15.0"
+  },
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nishimura-yuki/form-input-recover.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config=webpack.dev.js",
+    "build": "webpack --config=webpack.publish.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@types/crypto-js": "^3.1.38",
+    "@types/jquery": "^3.3.29",
+    "@types/node": "^10.12.18",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-emotion": "^10.0.5",
+    "clean-webpack-plugin": "^2.0.1",
+    "ejs": "^2.6.1",
+    "ejs-html-loader": "^4.0.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jquery": "^3.4.0",
+    "ts-loader": "^5.3.2",
+    "tslint": "^5.12.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.2.2",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "emotion": "^10.0.9"
+  }
+}

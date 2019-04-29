@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+</head>
+
+<body>
+  <%- include('./form.ejs') %>
+  <div id="form-input-recover-confirm-modal"></div>
+</body>
+
+<script>
+  // 第二引数なしの場合は自動でデータ復元
+  FormInputRecover.executeInputRecover(
+    {
+      expiredHour: 1
+    }
+  );
+</script>
+
+</html>
