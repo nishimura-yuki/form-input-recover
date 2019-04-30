@@ -16,7 +16,6 @@ deploy:
   bucket: "cdn.form-input-recover.com"
   skip_cleanup: true
   on:
-    branches:
-      only:
-        - master
-        - develop
+    branch:
+      - master
+      - develop
