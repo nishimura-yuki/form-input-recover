@@ -48,7 +48,7 @@ export default class FormInputDataManager {
 
     // localstorageに保存するためのキーを準備
     // {ライブラリプリフィックス}_{ページのパス}_{フォームID}
-    console.log('pathname?', location.pathname);
+    console.log('pathname', location.pathname);
     this.keyPrefix = props.keyPrefix ? props.keyPrefix : DEFAULT_KEY_PREFIX;
     if (props.formId) {
       this.keyName = `${this.keyPrefix}_${encodeURIComponent(location.pathname)}_${props.formId}`;
@@ -80,6 +80,7 @@ export default class FormInputDataManager {
       const type = target['type'];
       const name = target['name'];
       const tmpValue = target['value'];
+      console.log(type, name, tmpValue);
 
       // パスワードは保存しない
       if (!type || !name || type === 'password') return;
@@ -100,6 +101,20 @@ export default class FormInputDataManager {
           });
         }
         value = checkboxValues;
+      }
+      // select-multipleの場合はoption情報から取得
+      if (type === 'select-multiple') {
+        const options: HTMLOptionsCollection = target['options'];
+        if (options) {
+          value = [];
+          for (let i = 0; i < options.length; i++) {
+            const opt = options[i];
+            if (opt.selected) {
+              value.push(opt.value || opt.text);
+            }
+          }
+        }
+        console.log('select', value);
       }
 
       this.editingFormData[name] = {
@@ -126,12 +141,12 @@ export default class FormInputDataManager {
     try {
       console.log('before decrypt', localData);
       const decryptStr = CryptoJS.AES.decrypt(formDataStr, this.password);
-      console.log('after decrypt', decryptStr);
+      console.log('after decrypt1', decryptStr);
       formDataStr = decryptStr.toString(CryptoJS.enc.Utf8);
       if (!formDataStr) {
         return { error: ErrorType.ERROR_INCORRECT_PASSWORD };
       }
-      console.log('after decrypt', formDataStr);
+      console.log('after decrypt2', formDataStr);
     } catch (e) {
       console.log('error at decrypt', e, formDataStr);
       return { error: ErrorType.ERROR_INCORRECT_PASSWORD };
@@ -156,6 +171,7 @@ export default class FormInputDataManager {
       return { error: ErrorType.ERROR_DATA_NOT_FOUND };
     }
 
+    console.log('success loadData.');
     return { data: formData.data };
   }
 
@@ -202,7 +218,6 @@ export default class FormInputDataManager {
 
   recoverData = () => {
     const recoverData = this.storedFormData;
-    console.log(recoverData);
 
     // jQueryを使って値をセット
     Object.keys(recoverData).forEach((name) => {
@@ -212,6 +227,8 @@ export default class FormInputDataManager {
       } else if (attrs.type === 'textarea') {
         $(this.formElement).find(`textarea[name="${name}"]`).val(attrs.value);
       } else if (attrs.type === 'select-one') {
+        $(this.formElement).find(`select[name="${name}"]`).val(attrs.value);
+      } else if (attrs.type === 'select-multiple') {
         $(this.formElement).find(`select[name="${name}"]`).val(attrs.value);
       } else if (attrs.type === 'radio') {
         $(this.formElement).find(`input[name="${name}"][value="${attrs.value}"]`).attr('checked', 'true');
