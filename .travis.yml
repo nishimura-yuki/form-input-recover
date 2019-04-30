@@ -16,8 +16,9 @@ deploy:
   bucket: "cdn.form-input-recover.com"
   skip_cleanup: true
   local_dir: dist
-  upload-dir: travis-builds
+  acl: public_read
+  upload-dir:
+    - latest
+    - "$TRAVIS_TAG"
   on:
-    branch:
-      - master
-      - develop
+    tags: true
