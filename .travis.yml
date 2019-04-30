@@ -7,17 +7,25 @@ install:
 
 script:
   - npm run build
-  - echo $TRAVIS_TAG
 
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  region: ap-northeast-1
-  bucket: "cdn.form-input-recover.com"
-  skip_cleanup: true
-  local_dir: dist
-  - upload-dir: latest
-  - upload-dir: second
-  on:
-    branch: master
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    region: ap-northeast-1
+    bucket: "cdn.form-input-recover.com"
+    skip_cleanup: true
+    local_dir: dist
+    upload-dir: latest
+    on:
+      branch: master
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    region: ap-northeast-1
+    bucket: "cdn.form-input-recover.com"
+    skip_cleanup: true
+    local_dir: dist
+    upload-dir: $TRAVIS_TAG
+    on:
+      tags: true
