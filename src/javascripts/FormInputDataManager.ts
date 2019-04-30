@@ -63,7 +63,8 @@ export default class FormInputDataManager {
     } else {
       this.storedFormData = localData.data;
     }
-    this.editingFormData = Object.assign({}, this.storedFormData);
+    // this.editingFormData = Object.assign({}, this.storedFormData);
+    this.editingFormData = {};
 
     this.beginObserve();
 
@@ -73,63 +74,81 @@ export default class FormInputDataManager {
   private beginObserve = () => {
     // フォーム内のinput, textarea, select要素の更新イベントを監視して変数に記録
     // 自動保存モードの場合はさらにlocalstorageにも記録する
-    $(this.formElement).find('input,textarea,select').change((e) => {
+    $(this.formElement).find('input,select').change((e) => {
       const target: Element = e.target;
       if (!target) return;
 
-      const type = target['type'];
-      const name = target['name'];
-      const tmpValue = target['value'];
-      console.log(type, name, tmpValue);
+      this.updateLocalData(target);
 
-      // パスワードは保存しない
-      if (!type || !name || type === 'password') return;
-
-      // チェックボックスは文字列の配列で持たせる
-      let value = tmpValue;
-      if (type === 'checkbox' && this.editingFormData[name]) {
-        let checkboxValues = this.editingFormData[name].value;
-        if ((typeof checkboxValues) === 'string') {
-          checkboxValues = [checkboxValues];
-        }
-
-        if (target['checked']) {
-          checkboxValues.push(value);
-        } else {
-          checkboxValues.some((v, i) => {
-            if (v === value) checkboxValues.splice(i, 1);
-          });
-        }
-        value = checkboxValues;
-      }
-      // select-multipleの場合はoption情報から取得
-      if (type === 'select-multiple') {
-        const options: HTMLOptionsCollection = target['options'];
-        if (options) {
-          value = [];
-          for (let i = 0; i < options.length; i++) {
-            const opt = options[i];
-            if (opt.selected) {
-              value.push(opt.value || opt.text);
-            }
-          }
-        }
-        console.log('select', value);
-      }
-
-      this.editingFormData[name] = {
-        type, value,
-      };
-
-      // console.log('form changed', this.editingFormData);
-      // 自動的に記録するが高頻度の場合負荷が高いのでインターバルを1秒設ける
+      // 自動的に記録するが高頻度の場合負荷が高いのでインターバルを0.5秒設ける
       const current = new Date().getTime();
-      if ((current - this.lastSavedAt) > 1000) {
-        console.log('自動保存実行');
+      if ((current - this.lastSavedAt) > 500) {
+        console.log('change 自動保存実行');
         this.lastSavedAt = current;
         this.saveData();
       }
     });
+
+    $(this.formElement).find('input,textarea').keyup((e) => {
+      const target: Element = e.target;
+      if (!target) return;
+
+      this.updateLocalData(target);
+
+      // 自動的に記録するが高頻度の場合負荷が高いのでインターバルを1秒設ける
+      const current = new Date().getTime();
+      if ((current - this.lastSavedAt) > 1000) {
+        console.log('keyup 自動保存実行');
+        this.lastSavedAt = current;
+        this.saveData();
+      }
+    });
+  }
+
+  private updateLocalData(target: Element) {
+    const type = target['type'];
+    const name = target['name'];
+    const tmpValue = target['value'];
+    // console.log(type, name, tmpValue);
+
+    // パスワードは保存しない
+    if (!type || !name || type === 'password') return;
+
+    // チェックボックスは文字列の配列で持たせる
+    let value = tmpValue;
+    if (type === 'checkbox' && this.editingFormData[name]) {
+      let checkboxValues = this.editingFormData[name].value;
+      if ((typeof checkboxValues) === 'string') {
+        checkboxValues = [checkboxValues];
+      }
+
+      if (target['checked']) {
+        checkboxValues.push(value);
+      } else {
+        checkboxValues.some((v, i) => {
+          if (v === value) checkboxValues.splice(i, 1);
+        });
+      }
+      value = checkboxValues;
+    }
+    // select-multipleの場合はoption情報から取得
+    if (type === 'select-multiple') {
+      const options: HTMLOptionsCollection = target['options'];
+      if (options) {
+        value = [];
+        for (let i = 0; i < options.length; i++) {
+          const opt = options[i];
+          if (opt.selected) {
+            value.push(opt.value || opt.text);
+          }
+        }
+      }
+      console.log('select', value);
+    }
+
+    this.editingFormData[name] = {
+      type, value,
+    };
   }
 
   private loadData = () => {

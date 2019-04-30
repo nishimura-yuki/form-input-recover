@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - "10.15.0"
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  region: ap-northeast-1
+  bucket: "cdn.form-input-recover.com"
+  skip_cleanup: true
+  local_dir: dist
+  acl: public_read
+  upload-dir:
+    - latest
+    - "$TRAVIS_TAG"
+  on:
+    tags: true

@@ -1,8 +1,21 @@
 <% const title = 'Sample Using API.' %>
 <% const individualContent = `
-  <button >復元</button><button >削除</button>
+<div class="container" style="margin-bottom: 80px;">
+  <p>If you want to manually handle data. you can use "FormInputRecover" as a library.</p>
+  <button id="recoverButton" class="btn btn-success">Recover</button>
+</div>
 `; %>
 <% const individualScript = `
-var instance = FormInputRecover.createInstance({});
+var instance = FormInputRecover.createInstance({
+  expiredHour: 1
+});
+if(instance){
+  var btn = document.getElementById('recoverButton');
+  if(btn){
+    btn.addEventListener('click', function(e){
+      instance.recoverData();
+    });
+  }
+}
 `; %>
 <%- include('./layout.ejs', { title, individualContent , individualScript } ); %>

@@ -24,7 +24,12 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           { loader: 'ts-loader' },
-          { loader: 'tslint-loader' }
+          {
+            loader: 'tslint-loader',
+            options: {
+              typeCheck: true
+            }
+          }
         ]
       },
       // TypeScript loader(ts-loaderで変換しつつES6についてはbabel-loaderでダウンパイルする)
@@ -63,6 +68,11 @@ module.exports = {
       template: `${basePath}/src/examples/sample-api.ejs`,
       filename: "sample-api.html",
       chunks: ['form-input-recover'],
+    }),
+    new HtmlWebpackPlugin({
+      template: `${basePath}/src/examples/sample-submit.ejs`,
+      filename: "sample-submit.html",
+      chunks: [''],
     }),
   ]
 };
