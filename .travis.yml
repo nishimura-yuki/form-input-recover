@@ -7,6 +7,7 @@ install:
 
 script:
   - npm run build
+  - echo $TRAVIS_TAG
 
 deploy:
   provider: s3
@@ -16,7 +17,7 @@ deploy:
   bucket: "cdn.form-input-recover.com"
   skip_cleanup: true
   local_dir: dist
-  acl: public_read
   upload-dir: latest
   on:
     tags: true
+    branch: master
