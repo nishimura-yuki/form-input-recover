@@ -17,6 +17,6 @@ deploy:
   skip_cleanup: true
   local_dir: dist
   acl: public_read
-  upload-dir: "$TRAVIS_TAG"
+  upload-dir: latest
   on:
     tags: true
