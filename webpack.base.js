@@ -24,7 +24,12 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           { loader: 'ts-loader' },
-          { loader: 'tslint-loader' }
+          {
+            loader: 'tslint-loader',
+            options: {
+              typeCheck: true
+            }
+          }
         ]
       },
       // TypeScript loader(ts-loaderで変換しつつES6についてはbabel-loaderでダウンパイルする)
