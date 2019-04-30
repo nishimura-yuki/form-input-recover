@@ -18,6 +18,7 @@ deploy:
     local_dir: dist
     upload-dir: latest
     acl: public_read
+    cache_control: "max-age=86400"
     on:
       branch: master
   - provider: s3
@@ -29,5 +30,6 @@ deploy:
     local_dir: dist
     upload-dir: $TRAVIS_TAG
     acl: public_read
+    cache_control: "max-age=31536000"
     on:
       tags: true
