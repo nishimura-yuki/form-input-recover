@@ -1,17 +1,8 @@
-<html>
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-</head>
-
-<body>
-<%- include('./form.ejs') %>
-</body>
-
-<script>
-  var instance = FormInputRecover.createInstance();
-  
-</script>
-
-</html>
+<% const title = 'Sample Using API.' %>
+<% const individualContent = `
+  <button >復元</button><button >削除</button>
+`; %>
+<% const individualScript = `
+var instance = FormInputRecover.createInstance({});
+`; %>
+<%- include('./layout.ejs', { title, individualContent , individualScript } ); %>

@@ -52,7 +52,7 @@ const styledContainer = css`
   align-items: center;
   background-color: ${colors.white};
   border-color: ${colors.cloud};
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.30);
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
   display: flex;
   animation: show .18s linear 0s;
   @keyframes show {

@@ -1,25 +1,16 @@
-<html>
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-</head>
-
-<body>
-  <%- include('./form.ejs') %>
+<% const title = 'Sample Using Preset Modal.' %>
+<% const individualContent = ` 
   <div id="form-input-recover-confirm-modal"></div>
-</body>
-
-<script>
-  // 第二引数ありの場合はモーダルでの確認が発生
-  FormInputRecover.executeInputRecover(
-    {
-      expiredHour: 1
-    },
-    {
-      elementId: 'form-input-recover-confirm-modal',
-    }
-  );
-</script>
-
-</html>
+`; %>
+<% const individualScript = `
+// 第二引数ありの場合はモーダルでの確認が発生
+FormInputRecover.executeInputRecover(
+  {
+    expiredHour: 1
+  },
+  {
+    elementId: 'form-input-recover-confirm-modal',
+  }
+);
+`; %>
+<%- include('./layout.ejs', { title, individualContent , individualScript } ); %>

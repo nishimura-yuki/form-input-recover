@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Sample Form</h1>
+    <form method="post">
+      <div class="form-group">
+        <div class="form-group">
+          <label>Example text</label>
+          <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Example password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password will not be stored">
+      </div>
+
+      <div class="form-group">
+        <label>Example textarea</label>
+        <textarea class="form-control" name="textarea" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Example radio</label>
+        <div class="form-check">
+          <input type="radio" name="radio" id="radio1" class="form-check-input" value="Yes">
+          <label class="form-check-label" for="radio1">Yes</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="radio" id="radio2" class="form-check-input" value="No">
+          <label class="form-check-label" for="radio2">No</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Example select</label>
+        <select class="form-control" name="select">
+          <option value="select1">select1</option>
+          <option value="select2">select2</option>
+          <option value="select3">select3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Example multiple select</label>
+        <select multiple class="form-control" name="multipleselect">
+          <option value="multipleselect1">multipleselect1</option>
+          <option value="multipleselect2">multipleselect2</option>
+          <option value="multipleselect3">multipleselect3</option>
+          <option value="multipleselect4">multipleselect4</option>
+          <option value="multipleselect5">multipleselect5</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Example checkbox</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="checkbox" value="checkbox1">
+          <label class="form-check-label">
+            checkbox1
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="checkbox" value="checkbox2">
+          <label class="form-check-label">
+            checkbox2
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="checkbox" value="checkbox3">
+          <label class="form-check-label">
+            checkbox3
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <%- individualContent %>
+</body>
+
+<script>
+  <%- individualScript %>
+</script>
+
+</html>

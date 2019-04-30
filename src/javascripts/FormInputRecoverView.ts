@@ -26,27 +26,25 @@ export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
       }
 
       // 復元,削除,閉じるイベントを追加
-      if (elm) {
-        const recoverButton = elm.getElementsByClassName('buttonRecover');
-        const destroyButton = elm.getElementsByClassName('buttonDestroy');
-        const closeButton = elm.getElementsByClassName('buttonClose');
-        if (recoverButton && recoverButton.length > 0) {
-          recoverButton[0].addEventListener('click', () => {
-            instance.recoverData();
-          });
-        }
-        if (destroyButton && destroyButton.length > 0) {
-          destroyButton[0].addEventListener('click', () => {
-            instance.destroyData();
-          });
-        }
-        if (closeButton && closeButton.length > 0) {
-          closeButton[0].addEventListener('click', () => {
-            if (elm) {
-              elm.style.display = 'none';
-            }
-          });
-        }
+      const recoverButton = elm.getElementsByClassName('buttonRecover');
+      const destroyButton = elm.getElementsByClassName('buttonDestroy');
+      const closeButton = elm.getElementsByClassName('buttonClose');
+      if (recoverButton && recoverButton.length > 0) {
+        recoverButton[0].addEventListener('click', () => {
+          instance.recoverData();
+        });
+      }
+      if (destroyButton && destroyButton.length > 0) {
+        destroyButton[0].addEventListener('click', () => {
+          instance.destroyData();
+        });
+      }
+      if (closeButton && closeButton.length > 0) {
+        closeButton[0].addEventListener('click', () => {
+          if (elm) {
+            elm.style.display = 'none';
+          }
+        });
       }
     }
 
