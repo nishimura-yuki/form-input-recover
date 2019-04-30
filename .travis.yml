@@ -17,6 +17,7 @@ deploy:
     skip_cleanup: true
     local_dir: dist
     upload-dir: latest
+    acl: public_read
     on:
       branch: master
   - provider: s3
@@ -27,5 +28,6 @@ deploy:
     skip_cleanup: true
     local_dir: dist
     upload-dir: $TRAVIS_TAG
+    acl: public_read
     on:
       tags: true
