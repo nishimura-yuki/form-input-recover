@@ -19,6 +19,6 @@ deploy:
   local_dir: dist
   upload-dir: 
     - latest
-    - $TRAVIS_JOB_NUMBER
+    - second
   on:
     branch: master
