@@ -32,18 +32,18 @@ export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
       if (recoverButton && recoverButton.length > 0) {
         recoverButton[0].addEventListener('click', () => {
           instance.recoverData();
+          if (elm) elm.style.display = 'none';
         });
       }
       if (destroyButton && destroyButton.length > 0) {
         destroyButton[0].addEventListener('click', () => {
           instance.destroyData();
+          if (elm) elm.style.display = 'none';
         });
       }
       if (closeButton && closeButton.length > 0) {
         closeButton[0].addEventListener('click', () => {
-          if (elm) {
-            elm.style.display = 'none';
-          }
+          if (elm) elm.style.display = 'none';
         });
       }
     }

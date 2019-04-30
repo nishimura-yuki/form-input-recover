@@ -1,5 +1,7 @@
 import { css } from 'emotion';
 
+const WIDTH_FOR_PC = 481;
+
 const colors = {
   // Red
   lightRed: '#ff8a80',
@@ -44,10 +46,6 @@ const styleButton = `
 const styledContainer = css`
   ${styleCommon};
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 180px;
-  padding: 16px 8px 16px 8px;
   flex-direction: column;
   align-items: center;
   background-color: ${colors.white};
@@ -65,6 +63,24 @@ const styledContainer = css`
       opacity: 1;
     }
   }
+
+  padding: 4px 2px 4px 2px;
+  top: auto;
+  right: auto;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  // PC(タブレット)向けのCSS
+  @media screen and (min-width: ${WIDTH_FOR_PC}px){
+    // 横幅180px で右上に固定表示
+    padding: 16px 8px 16px 8px;
+    left: auto;
+    bottom: auto;
+    top: 20px;
+    right: 20px;
+    width: 180px;
+  }
 `;
 
 const styledContent = css`
@@ -72,34 +88,42 @@ const styledContent = css`
   width: 100%;
   & > div{
     ${styleCommon};
-    margin-bottom: 8px;
-    & > p {
+    padding: 0 4px;
+    margin-bottom: 2px;
+    & > span {
       ${styleCommon};
       font-size: 12px;
       color: ${colors.black};
     }
   }
 
-  & .message {
-    ${styleCommon};
-    margin-top: 8px;
-    margin-bottom: 8px;
-    color: ${colors.red};
-    font-size: 10px;
-  }
   & > ul {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     list-style-type: none;
     padding: 0;
     margin: 0;
     & > li {
       width: 100%;
-      margin-bottom: 8px;
+      margin-bottom: 2px;
+      padding: 0 4px;
       &:last-child {
         margin-bottom: 0;
+      }
+    }
+  }
+
+  // PC(タブレット)向けのCSS
+  @media screen and (min-width: ${WIDTH_FOR_PC}px){
+    & > div{
+      margin-bottom: 8px;
+    }
+    & > ul{
+      flex-direction: column;
+      & > li{
+        margin-bottom: 8px;
       }
     }
   }
@@ -164,13 +188,12 @@ export default (zIndex?: number) => {
     >
       <div class="${styledContent}">
         <div>
-          <p>以前入力した内容を</p>
-          <p>復元しますか？</p>
+          <span>以前入力した内容に戻しますか？</span>
         </div>
         <ul>
           <li>
             <button class="${styledSubmitButton} buttonRecover">
-              復元
+              戻す
             </button>
           </li>
           <li>
