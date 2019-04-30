@@ -56,5 +56,9 @@ export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
   }
 
   // サブミットイベント発生時にデータ削除
+  document.addEventListener('submit', (e) => {
+    // console.log('detect submit.');
+    instance.destroyData();
+  });
 
 };

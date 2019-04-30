@@ -64,5 +64,10 @@ module.exports = {
       filename: "sample-api.html",
       chunks: ['form-input-recover'],
     }),
+    new HtmlWebpackPlugin({
+      template: `${basePath}/src/examples/sample-submit.ejs`,
+      filename: "sample-submit.html",
+      chunks: [''],
+    }),
   ]
 };
