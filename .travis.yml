@@ -19,5 +19,4 @@ deploy:
   local_dir: dist
   upload-dir: latest
   on:
-    tags: true
     branch: master
