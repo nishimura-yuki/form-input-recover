@@ -34,7 +34,7 @@ module.exports = {
       },
       // TypeScript loader(ts-loaderで変換しつつES6についてはbabel-loaderでダウンパイルする)
       {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },

@@ -80,13 +80,9 @@ export default class FormInputDataManager {
 
       this.updateLocalData(target);
 
-      // 自動的に記録するが高頻度の場合負荷が高いのでインターバルを0.5秒設ける
-      const current = new Date().getTime();
-      if ((current - this.lastSavedAt) > 500) {
-        console.log('change 自動保存実行');
-        this.lastSavedAt = current;
-        this.saveData();
-      }
+      console.log('change 自動保存実行');
+      this.lastSavedAt = new Date().getTime();
+      this.saveData();
     });
 
     $(this.formElement).find('input,textarea').keyup((e) => {

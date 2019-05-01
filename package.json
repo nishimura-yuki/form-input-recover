@@ -16,7 +16,22 @@
   "scripts": {
     "start": "webpack-dev-server --config=webpack.dev.js",
     "build": "webpack --config=webpack.publish.js",
-    "postversion": "git push origin $(git describe --abbrev=0 --tags)"
+    "postversion": "git push origin $(git describe --abbrev=0 --tags)",
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/config/",
+      "helper.js"
+    ],
+    "globalSetup": "<rootDir>/test/e2e/config/setup.js",
+    "globalTeardown": "<rootDir>/test/e2e/config/teardown.js",
+    "testEnvironment": "<rootDir>/test/e2e/config/puppeteer_environment.js",
+    "preset": "jest-puppeteer"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -33,7 +48,10 @@
     "emotion": "^10.0.9",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.7.1",
+    "jest-puppeteer": "^4.1.1",
     "jquery": "^3.4.0",
+    "puppeteer": "^1.15.0",
     "ts-loader": "^5.3.2",
     "tslint": "^5.12.0",
     "tslint-config-airbnb": "^5.11.1",
