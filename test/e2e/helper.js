@@ -1,5 +1,5 @@
 
-export const putValues = async (page) => {
+exports.putValues = async (page) => {
   await page.type('input[name="email"]', "text sample");
   await page.type('input[name="password"]', "password sample");
   await page.type('textarea[name="textarea"]', "textarea sample1\ntextarea sample3\ntextarea sample3");

@@ -1,12 +1,12 @@
 const helper = require('./helper');
 
-describe('sample-modal', () => {
+describe('sample-auto', () => {
   const timeout = 10000;
   let page;
 
   beforeEach(async () => {
     page = await global.__BROWSER__.newPage();
-    await page.goto('http://localhost:9091/sample-modal.html', { waitUntil: "domcontentloaded" });
+    await page.goto('http://localhost:9091/sample-auto.html', { waitUntil: "domcontentloaded" });
     await helper.putValues(page);
   }, timeout);
 
@@ -40,14 +40,8 @@ describe('sample-modal', () => {
     expect(checkbox3).toBe(false);
   };
 
-  it('復元の確認', async () => {
+  it('自動復元の確認', async () => {
     await page.reload();
-
-    // valueがセットされていないことを確認
-    await assertForEmpty(page);
-
-    // 復元ボタンクリック
-    await page.click('#form-input-recover-confirm-modal .buttonRecover');
 
     // 値がセットされていることを確認
     const text = await page.$eval('input[name="email"]', item => item.value);
@@ -80,10 +74,6 @@ describe('sample-modal', () => {
     const checkbox3 = await page.$eval('input[name="checkbox"][value="checkbox3"]', item => item.checked);
     expect(checkbox3).toBe(true);
 
-    // モーダルが閉じていることを確認
-    const modalDisplay = await page.$eval('#form-input-recover-confirm-modal', item => item.style.display);
-    expect(modalDisplay).toBe('none');
-
     // localstorageにデータが存在することを確認
     const data = await getLocalstorageData(page);
     expect(data).not.toBe('');
@@ -99,77 +89,11 @@ describe('sample-modal', () => {
     expect(page.url()).toContain('sample-submit.html');
 
     // localstorageからデータが削除されていることを確認
-    await page.goto('http://localhost:9091/sample-modal.html', { waitUntil: "domcontentloaded" });
+    await page.goto('http://localhost:9091/sample-auto.html', { waitUntil: "domcontentloaded" });
     const dataAfter = await getLocalstorageData(page);
     expect(dataAfter).toBe(null);
 
     // await page.screenshot({ path: 'screenshot.png', fullPage: true })
-  }, timeout);
-
-  it('削除の確認', async () => {
-    await page.reload();
-
-    // valueがセットされていないことを確認
-    await assertForEmpty(page);
-
-    // localstorageにデータが存在することを確認
-    const data = await getLocalstorageData(page);
-    expect(data).not.toBe('');
-    expect(data).not.toBe(null);
-    expect(data).not.toBe(undefined);
-
-    // 削除ボタンクリック
-    await page.click('#form-input-recover-confirm-modal .buttonDestroy');
-
-    // valueがセットされていないことを確認
-    await assertForEmpty(page);
-    
-    // モーダルが閉じていることを確認
-    const modalDisplay = await page.$eval('#form-input-recover-confirm-modal', item => item.style.display);
-    expect(modalDisplay).toBe('none');
-
-    // localstorageからデータが削除されていることを確認
-    const dataAfter = await getLocalstorageData(page);
-    expect(dataAfter).toBe(null);
-
-  }, timeout);
-
-
-  it('閉じるの確認', async () => {
-    await page.reload();
-
-    // valueがセットされていないことを確認
-    await assertForEmpty(page);
-
-    // 閉じるボタンクリック
-    await page.click('#form-input-recover-confirm-modal .buttonClose');
-
-    // valueがセットされていないことを確認
-    await assertForEmpty(page);
-
-    // モーダルが閉じていることを確認
-    const modalDisplay = await page.$eval('#form-input-recover-confirm-modal', item => item.style.display);
-    expect(modalDisplay).toBe('none');
-
-    // localstorageにデータが存在することを確認
-    const data = await getLocalstorageData(page);
-    expect(data).not.toBe('');
-    expect(data).not.toBe(null);
-    expect(data).not.toBe(undefined);
-
-    // Submit実行
-    await page.$eval('form', (form) => {
-      const e = new Event('submit');
-      form.dispatchEvent(e);
-      form.submit();
-    });
-    expect(page.url()).toContain('sample-submit.html');
-
-    // localstorageからデータが削除されていることを確認
-    await page.goto('http://localhost:9091/sample-modal.html', { waitUntil: "domcontentloaded" });
-    const dataAfter = await getLocalstorageData(page);
-    expect(dataAfter).toBe(null);
-
   }, timeout);
 
 });

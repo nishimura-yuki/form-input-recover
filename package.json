@@ -31,7 +31,8 @@
     "globalSetup": "<rootDir>/test/e2e/config/setup.js",
     "globalTeardown": "<rootDir>/test/e2e/config/teardown.js",
     "testEnvironment": "<rootDir>/test/e2e/config/puppeteer_environment.js",
-    "preset": "jest-puppeteer"
+    "preset": "jest-puppeteer",
+    "transformIgnorePatterns": ["/test/", "/node_modules/"]
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
