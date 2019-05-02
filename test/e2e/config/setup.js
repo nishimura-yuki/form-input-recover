@@ -15,7 +15,10 @@ module.exports = async function() {
   server.listen(9091, '127.0.0.1');
   global.__SERVER_GLOBAL__ = server;
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   // store the browser instance so we can teardown it later
   // this global is only available in the teardown but not in TestEnvironments
   global.__BROWSER_GLOBAL__ = browser;
