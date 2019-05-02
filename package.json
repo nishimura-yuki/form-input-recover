@@ -1,6 +1,6 @@
 {
   "name": "form-input-recover",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "homepage": "https://greendiver234.com",
   "author": "Nishimura Yuki",
   "license": "MIT",
@@ -32,7 +32,10 @@
     "globalTeardown": "<rootDir>/test/e2e/config/teardown.js",
     "testEnvironment": "<rootDir>/test/e2e/config/puppeteer_environment.js",
     "preset": "jest-puppeteer",
-    "transformIgnorePatterns": ["/test/", "/node_modules/"]
+    "transformIgnorePatterns": [
+      "/test/",
+      "/node_modules/"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
