@@ -1,7 +1,7 @@
 import { putValues } from './helper';
 
 describe('simple-modal', () => {
-  const timeout = 5000;
+  const timeout = 10000;
   let page;
 
   beforeEach(async () => {
