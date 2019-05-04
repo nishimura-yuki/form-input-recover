@@ -1,4 +1,5 @@
 import { css } from 'emotion';
+import i18n from './i18n';
 
 const WIDTH_FOR_PC = 481;
 
@@ -188,22 +189,22 @@ export default (zIndex?: number) => {
     >
       <div class="${styledContent}">
         <div>
-          <span>以前入力した内容に戻しますか？</span>
+          <span>${i18n.t('confirmMessage')}</span>
         </div>
         <ul>
           <li>
             <button class="${styledSubmitButton} buttonRecover">
-              戻す
+            ${i18n.t('recover')}
             </button>
           </li>
           <li>
             <button class="${styledDeleteButton} buttonDestroy">
-              削除
+            ${i18n.t('destroy')}
             </button>
           </li>
           <li>
             <button class="${styledCloseButton} buttonClose">
-              閉じる
+              ${i18n.t('close')}
             </button>
           </li>
         </ul>

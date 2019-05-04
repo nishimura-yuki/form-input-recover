@@ -1,9 +1,11 @@
 import { createInstance, Props } from './FormInputRecover';
+import i18n from '../view/i18n';
 import ConfirmModal from '../view/ConfirmModal';
 
 export type ViewProps = {
   elementId: string;
   zIndex?: number;
+  lang?: string;
 };
 
 export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
@@ -12,7 +14,8 @@ export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
 
   if (viewProps) {
     if (instance.hasStoredData()) {
-      const { elementId, zIndex } = viewProps;
+      const { elementId, zIndex, lang } = viewProps;
+      if (lang) i18n.changeLanguage(lang);
       const confirmModal = ConfirmModal(zIndex);
       let elm: (HTMLElement | null) = document.getElementById(elementId);
 
@@ -56,9 +59,13 @@ export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
   }
 
   // サブミットイベント発生時にデータ削除
-  document.addEventListener('submit', () => {
-    // console.log('detect submit.');
-    instance.destroyData();
-  }, true);
+  document.addEventListener(
+    'submit',
+    () => {
+      // console.log('detect submit.');
+      instance.destroyData();
+    },
+    true,
+  );
 
 };
