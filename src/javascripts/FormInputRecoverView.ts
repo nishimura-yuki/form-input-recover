@@ -3,7 +3,7 @@ import i18n from '../view/i18n';
 import ConfirmModal from '../view/ConfirmModal';
 
 export type ViewProps = {
-  elementId: string;
+  elementId?: string;
   zIndex?: number;
   lang?: string;
 };
@@ -17,7 +17,8 @@ export const executeInputRecover = (props: Props, viewProps?: ViewProps) => {
       const { elementId, zIndex, lang } = viewProps;
       if (lang) i18n.changeLanguage(lang);
       const confirmModal = ConfirmModal(zIndex);
-      let elm: (HTMLElement | null) = document.getElementById(elementId);
+      let elm: (HTMLElement | null) = null;
+      if (elementId) elm = document.getElementById(elementId);
 
       if (elm) {
         elm.innerHTML = confirmModal;

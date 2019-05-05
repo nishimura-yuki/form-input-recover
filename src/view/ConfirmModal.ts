@@ -182,7 +182,7 @@ const styledCloseButton = css`
 
 // ピュアなDOMのスタイルにemotionを適用してみた
 export default (zIndex?: number) => {
-  const z = zIndex ? zIndex : 100;
+  const z = zIndex ? zIndex : 1000;
   return `<div
       class="${styledContainer}"
       style="z-index: ${z}"
