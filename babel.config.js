@@ -5,7 +5,8 @@ module.exports = {
       {
         targets: {
           ie: '11',
-        }
+        },
+        useBuiltIns: "usage",
       },
     ],
   ],
