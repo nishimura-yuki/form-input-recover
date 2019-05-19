@@ -1,8 +1,69 @@
-import i18next from 'i18next';
+type Props = {
+  fallbackLng: string;
+  resources: {
+    [key: string]: {
+      translation: {
+        [key: string]: string;
+      },
+    };
+  };
+};
 
-i18next.init({
+class I18n {
+  private fallbackLng: string;
+  private currentResource: {
+    translation: {
+      [key: string]: string;
+    },
+  };
+  private fallbackResource: {
+    translation: {
+      [key: string]: string;
+    },
+  };
+  private resources: {
+    [key: string]: {
+      translation: {
+        [key: string]: string;
+      },
+    },
+  };
+
+  constructor(props: Props) {
+    this.fallbackLng = props.fallbackLng;
+    this.resources = {};
+    const keys = Object.keys(props.resources);
+    for (let i = keys.length - 1; i >= 0; i--) {
+      const key = keys[i];
+      this.resources[key] = props.resources[key];
+      this.currentResource = props.resources[key];
+      this.fallbackResource = props.resources[key];
+    }
+
+    if (this.resources[this.fallbackLng]) {
+      this.fallbackResource = this.resources[this.fallbackLng];
+    }
+  }
+
+  changeLanguage(lang: string) {
+    if (this.resources[lang]) {
+      this.currentResource = this.resources[lang];
+    }
+  }
+
+  t(key: string): string {
+    if (this.currentResource.translation[key]) {
+      return this.currentResource.translation[key];
+    }
+    if (this.fallbackResource.translation[key]) {
+      return this.fallbackResource.translation[key];
+    }
+    return '';
+  }
+}
+
+const singleton = new I18n({
   fallbackLng: 'en',
-  debug: true,
   resources: {
     en: {
       translation: {
@@ -23,4 +84,4 @@ i18next.init({
   },
 });
 
-export default i18next;
+export default singleton;

@@ -11,6 +11,9 @@
     "no-increment-decrement": false,
     "radix": false,
     "ter-arrow-parens": false,
-    "variable-name": [false]
+    "variable-name": [false],
+    "function-name": [true, {
+      "method-regex": "^[a-z$][\\w\\d]*$"
+    }]
   }
 }

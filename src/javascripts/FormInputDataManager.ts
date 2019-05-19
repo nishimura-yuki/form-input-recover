@@ -259,6 +259,8 @@ export default class FormInputDataManager {
         $(this.formElement).find(`input[name="${name}"]`).val(attrs.value);
       }
     });
+
+    this.editingFormData = Object.assign({}, this.storedFormData, this.editingFormData);
   }
 
 }
